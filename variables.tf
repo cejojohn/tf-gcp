@@ -5,7 +5,8 @@ variable "my_vm_name" {
 }
 
 variable "instance_machine_type" {
-  type = "e2-micro"
+  type = string
+  default = "e2-micro"
 }
 
 variable "instance_boot_disk" {

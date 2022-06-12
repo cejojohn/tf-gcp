@@ -1,6 +1,6 @@
 resource "google_compute_instance" "default" {
-  name         = vars.my_vm_name
-  machine_type = vars.instance_machine_type
+  name         = var.my_vm_name
+  machine_type = var.instance_machine_type
   zone         = "us-central1-a"
   count        = 1
   network_interface {
@@ -9,7 +9,7 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  tags = ["web"]
+  tags = ["webservers"]
 
   boot_disk {
     initialize_params {
@@ -27,5 +27,6 @@ resource "google_compute_firewall" "rules" {
     protocol  = "tcp"
     ports     = ["22","80","443"]
   }
-  target_tags = ["web"]
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["webservers"]
 }
