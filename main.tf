@@ -1,8 +1,8 @@
 resource "google_compute_instance" "default" {
-  name         = var.my_vm_name
+  count        = 2
+  name         = "${var.my_vm_name_prefix}-${count.index}"
   machine_type = var.instance_machine_type
   zone         = "us-central1-a"
-  count        = 1
   network_interface {
     network = "default"
     access_config {
@@ -29,4 +29,8 @@ resource "google_compute_firewall" "rules" {
   }
   source_ranges = ["0.0.0.0/0"]
   target_tags = ["webservers"]
+}
+
+output "Instance_PublicIP" {
+  value = google_compute_instance.default.*.network_interface
 }

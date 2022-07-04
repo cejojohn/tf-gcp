@@ -1,7 +1,7 @@
-variable "my_vm_name" {
+variable "my_vm_name_prefix" {
   description = "Name of the instance to spin"
   type = string
-  default = "cv-tf-1"
+  default = "cv-tf"
 }
 
 variable "instance_machine_type" {
