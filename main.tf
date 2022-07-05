@@ -1,7 +1,7 @@
 resource "google_compute_instance" "default" {
-  count        = 2
+  count        = length(var.instances-list)
   name         = "${var.my_vm_name_prefix}-${count.index}"
-  machine_type = var.instance_machine_type
+  machine_type = var.instances-list[count.index].instance_machine_type
   zone         = "us-central1-a"
   network_interface {
     network = "default"
@@ -13,9 +13,10 @@ resource "google_compute_instance" "default" {
 
   boot_disk {
     initialize_params {
-      image = var.instance_boot_disk
+      image = var.instances-list[count.index].instance_boot_disk
     }
   }
+  metadata_startup_script = file(var.instances-list[count.index].metadata_script)
 }
 
 resource "google_compute_firewall" "rules" {
