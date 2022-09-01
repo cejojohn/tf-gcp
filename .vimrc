@@ -1,0 +1,13 @@
+set relativenumber
+set number
+set nohlsearch
+set hidden
+set noerrorbells
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set scrolloff=8
+set noswapfile
+set incsearch
+set signcolumn=yes
